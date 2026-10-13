@@ -1,19 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoCash Super App</title>
-  <meta http-equiv="refresh"
-        content="0;url=https://play.google.com/store/apps/details?id=com.ecocash.superapp">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Flow Demo</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #333;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.page.active { display: block; }
+
+.login {
+  padding: 35px 22px;
+  min-height: 64vh;
+}
+
+.brand {
+  font-size: 39px;
+  font-weight: bold;
+  color: #1768b5;
+  margin: 12px 0 60px;
+}
+
+.brand span { color: #cf444b; }
+
+h2 { margin-bottom: 35px; }
+
+input {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 15px auto;
+  padding: 15px;
+  border: 1.5px solid #367bb6;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  border: 0;
+  border-radius: 9px;
+  background: #1768d5;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.note {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 18px auto;
+  max-width: 400px;
+}
+
+.footer {
+  background: #0874df;
+  color: white;
+  min-height: 36vh;
+  padding: 40px 22px;
+  border-radius: 45% 45% 0 0 / 12% 12% 0 0;
+}
+
+.footer p { line-height: 1.6; }
+
+.otp-box {
+  padding: 60px 22px;
+}
+
+.otp-box .brand { margin-bottom: 35px; }
+
+.back {
+  background: #eaf2fc;
+  color: #1768b5;
+  margin-top: 12px;
+}
+</style>
 </head>
+
 <body>
-  <p>Opening the official EcoCash Super App...</p>
-  <p>
-    If you are not redirected,
-    <a href="https://play.google.com/store/apps/details?id=com.ecocash.superapp">
-      continue to EcoCash on Google Play
-    </a>.
-  </p>
-</body>
-</html>
+
+<!-- DEMO LOGIN PAGE -->
+<section class="page active" id="loginPage">
+  <div class="login">
+    <div class="brand">Eco<span>Cash</span></div>
+
+    <h2>Demo Login</h2>
+
+    <p class="note">
+      Demonstration only. Do not enter your real EcoCash phone number or PIN.
+    </p>
+
+    <input
+      id="demoPhone"
+      type="text"
+      placeholder="Test phone number"
+      autocomplete="off"
+    >
+
+    <input
+      id="demoPin"
+      type="password"
+      placeholder="Test PIN (any 4 digits)"
+      inputmode="numeric"
+      maxlength="4"
+      autocomplete="off"
+    >
+
+    <button id="continueBtn">Continue to demo OTP</button>
+  </div>
+
+  <div class="footer">
+    <p>Login flow demonstration</p>
+    <p>No real account authentication takes place.</p>
+  </div>
+</section>
+
+<!-- DEMO OTP PAGE -->
+<section class="page" id="otpPage">
+  <div class="otp-box">
+    <div class="brand">Login <span>Verification</span></div>
+
+    <h2>Demo OTP Verification</h2>
+
+    <p class="note">
+      This is a simulated verification screen.
+      No SMS or real OTP is sent or verified.
+    </p>
+
+    <input
+      id="demoOtp"
+      type="text"
+      placeholder="Enter any 6 test digits"
+      inputmode="numeric"
+      maxlength="6"
+      autocomplete="off"
+    >
+
+    <button id="verifyBtn">Finish Demo</button>
+
+    <button class="back" id="backBtn">Back to demo login</button>
+
+    <p class="note" id="result"></p>
+  </div>
+</section>
+
+<script>
+const loginPage = document.getElementById("loginPage");
+const otpPage = document.getElementById("otpPage");
+
+document.getElementById("continueBtn").addEventListener("click", () => {
+  const phone = document.getElementById("demoPhone").value.trim();
+  const pin = document.getElementById("demoPin").value;
+
+  if (!phone || !/^\d{4}$/.test(pin)) {
+    alert("Enter a test phone number and any four-digit demo PIN.");
+    return;
+  }
+
+  // Never send or save these demo inputs.
+  document.getElementById("demoPhone").value = "";
+  document.getElementById("demoPin").value = "";
+
+  loginPage.classList.remove("active");
+  otpPage.classList.add("active");
+});
+
+document.getElementById("verifyBtn").addEventListener("click", () => {
+  const otp = document.getElementById("demoOtp").value;
+
+  if (!/^\d{6}$/.test(otp)) {
+    alert("Enter any six digits for this demo.");
+    return;
+  }
+
+  document.getElementById("demoOtp").value = "";
+  document.getElementById("result").textContent =
+    "Demo completed. No account was accessed and no OTP was verified.";
+});
+
+document.getElementById("backBtn").addEventListener("click", () => {
+  document.getElementById("demoOtp").value = "";
+  document.getElementById("result").textContent = "";
+  otpPage.classList.rem
+  
