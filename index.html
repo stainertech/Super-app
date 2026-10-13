@@ -2,201 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login Flow Demo</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0875d1">
+<title>Wallet Login</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fff;
-  color: #333;
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif}
+body{background:#0875d1}
+.app{
+  display:flex;flex-direction:column;
+  height:100vh;height:100dvh;width:100%;
+  overflow:hidden;color:white;
+  background:linear-gradient(160deg,#087bd8,#0063c9)
 }
-
-.page {
-  display: none;
-  min-height: 100vh;
-  text-align: center;
+.top{
+  height:59%;flex-shrink:0;
+  background:#fff;color:#303b42;
+  border-radius:0 0 50% 10% / 0 0 9% 5%;
+  padding:clamp(28px,7vh,58px) 22px 25px;
+  text-align:center
 }
-
-.page.active { display: block; }
-
-.login {
-  padding: 35px 22px;
-  min-height: 64vh;
-}
-
-.brand {
-  font-size: 39px;
-  font-weight: bold;
-  color: #1768b5;
-  margin: 12px 0 60px;
-}
-
-.brand span { color: #cf444b; }
-
-h2 { margin-bottom: 35px; }
-
-input {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  margin: 15px auto;
-  padding: 15px;
-  border: 1.5px solid #367bb6;
-  border-radius: 9px;
-  font-size: 16px;
-}
-
-button {
-  width: 100%;
-  max-width: 400px;
-  padding: 15px;
-  border: 0;
-  border-radius: 9px;
-  background: #1768d5;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.note {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.6;
-  margin: 18px auto;
-  max-width: 400px;
-}
-
-.footer {
-  background: #0874df;
-  color: white;
-  min-height: 36vh;
-  padding: 40px 22px;
-  border-radius: 45% 45% 0 0 / 12% 12% 0 0;
-}
-
-.footer p { line-height: 1.6; }
-
-.otp-box {
-  padding: 60px 22px;
-}
-
-.otp-box .brand { margin-bottom: 35px; }
-
-.back {
-  background: #eaf2fc;
-  color: #1768b5;
-  margin-top: 12px;
+.logo{font-size:clamp(29px,8vw,36px);font-weight:800;
+  letter-spacing:-1px;margin:0 0 clamp(26px,6vh,43px);
+  color:#1769b4}
+.logo span{color:#d23d43}
+h1{font-size:18px;margin:0 0 20px}
+.phone{height:46px;border:1.5px solid #2878b7;border-radius:6px;
+  display:flex;align-items:center;gap:9px;padding:0 9px;text-align:left}
+.dial{font-size:13px;color:#68727b}
+.phone input{width:100%;min-width:0;border:0;outline:0;
+  font-size:14px;background:transparent}
+.hint{font-size:12px;color:#626c74;margin:10px 0 21px}
+.pin{display:flex;justify-content:center;gap:7px}
+.pin input{width:clamp(42px,10vw,49px);height:clamp(42px,10vw,49px);
+  border:1.4px solid #2878b7;border-radius:7px;text-align:center;
+  font-size:22px;color:#1769b4;background:white}
+.bottom{flex:1;min-height:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:12px 22px max(22px,env(safe-area-inset-bottom));
+  text-align:center}
+.prompt{font-size:12px;line-height:1.5;margin:0 auto 18px}
+.actions{display:flex;gap:10px}
+.actions button{height:56px;flex:1;border:0;border-radius:9px;
+  background:white;color:#0871c9;font-size:12px;cursor:pointer}
+.symbol{display:block;font-size:18px;margin-bottom:4px}
+.version{font-size:11px;margin:clamp(22px,5vh,42px) 0 8px}
+.terms{font-size:11px;line-height:1.4;margin:0;color:#eaf4ff}
+.terms a{color:white;text-decoration:underline}
+#notice{font-size:12px;min-height:16px;margin:8px 0 0}
+@media(max-height:650px){
+ .top{height:62%;padding-top:20px}
+ .logo{margin-bottom:16px}
+ h1{margin-bottom:12px}
+ .hint{margin:7px 0 12px}
+ .version{margin-top:14px}
+ .prompt{margin-bottom:10px}
 }
 </style>
 </head>
-
 <body>
+<div class="app">
+  <section class="top">
+    <div class="logo">Wallet<span>Access</span></div>
+    <h1>Login</h1>
 
-<!-- DEMO LOGIN PAGE -->
-<section class="page active" id="loginPage">
-  <div class="login">
-    <div class="brand">Eco<span>Cash</span></div>
+    <div class="phone">
+      <span>🇿🇼</span>
+      <span class="dial">+263</span>
+      <input type="tel" inputmode="numeric"
+        placeholder="Phone Number" aria-label="Phone number">
+    </div>
 
-    <h2>Demo Login</h2>
+    <p class="hint">Enter your PIN</p>
+    <div class="pin">
+      <input aria-label="PIN digit 1" type="password"
+        inputmode="numeric" maxlength="1">
+      <input aria-label="PIN digit 2" type="password"
+        inputmode="numeric" maxlength="1">
+      <input aria-label="PIN digit 3" type="password"
+        inputmode="numeric" maxlength="1">
+      <input aria-label="PIN digit 4" type="password"
+        inputmode="numeric" maxlength="1">
+    </div>
+  </section>
 
-    <p class="note">
-      Demonstration only. Do not enter your real EcoCash phone number or PIN.
+  <section class="bottom">
+    <p class="prompt">
+      To register for a wallet or get assistance, click below
     </p>
 
-    <input
-      id="demoPhone"
-      type="text"
-      placeholder="Test phone number"
-      autocomplete="off"
-    >
+    <div class="actions">
+      <button type="button" id="register">
+        <span class="symbol">♟</span>Register
+      </button>
+      <button type="button" id="help">
+        <span class="symbol">ⓘ</span>Help &amp; Support
+      </button>
+    </div>
 
-    <input
-      id="demoPin"
-      type="password"
-      placeholder="Test PIN (any 4 digits)"
-      inputmode="numeric"
-      maxlength="4"
-      autocomplete="off"
-    >
-
-    <button id="continueBtn">Continue to demo OTP</button>
-  </div>
-
-  <div class="footer">
-    <p>Login flow demonstration</p>
-    <p>No real account authentication takes place.</p>
-  </div>
-</section>
-
-<!-- DEMO OTP PAGE -->
-<section class="page" id="otpPage">
-  <div class="otp-box">
-    <div class="brand">Login <span>Verification</span></div>
-
-    <h2>Demo OTP Verification</h2>
-
-    <p class="note">
-      This is a simulated verification screen.
-      No SMS or real OTP is sent or verified.
+    <p class="version">Mobile Wallet</p>
+    <p class="terms">
+      By continuing, you agree to the
+      <a href="#" id="terms">Terms and Conditions</a>
     </p>
-
-    <input
-      id="demoOtp"
-      type="text"
-      placeholder="Enter any 6 test digits"
-      inputmode="numeric"
-      maxlength="6"
-      autocomplete="off"
-    >
-
-    <button id="verifyBtn">Finish Demo</button>
-
-    <button class="back" id="backBtn">Back to demo login</button>
-
-    <p class="note" id="result"></p>
-  </div>
-</section>
+    <p id="notice" role="status"></p>
+  </section>
+</div>
 
 <script>
-const loginPage = document.getElementById("loginPage");
-const otpPage = document.getElementById("otpPage");
+const pinInputs = [...document.querySelectorAll(".pin input")];
 
-document.getElementById("continueBtn").addEventListener("click", () => {
-  const phone = document.getElementById("demoPhone").value.trim();
-  const pin = document.getElementById("demoPin").value;
+pinInputs.forEach((input, index) => {
+  input.addEventListener("input", () => {
+    input.value = input.value.replace(/\D/g, "").slice(0, 1);
+    if (input.value && pinInputs[index + 1]) {
+      pinInputs[index + 1].focus();
+    }
+  });
 
-  if (!phone || !/^\d{4}$/.test(pin)) {
-    alert("Enter a test phone number and any four-digit demo PIN.");
-    return;
-  }
-
-  // Never send or save these demo inputs.
-  document.getElementById("demoPhone").value = "";
-  document.getElementById("demoPin").value = "";
-
-  loginPage.classList.remove("active");
-  otpPage.classList.add("active");
+  input.addEventListener("keydown", event => {
+    if (event.key === "Backspace" &&
+        !input.value && pinInputs[index - 1]) {
+      pinInputs[index - 1].focus();
+    }
+  });
 });
 
-document.getElementById("verifyBtn").addEventListener("click", () => {
-  const otp = document.getElementById("demoOtp").value;
+const notice = document.getElementById("notice");
 
-  if (!/^\d{6}$/.test(otp)) {
-    alert("Enter any six digits for this demo.");
-    return;
-  }
+document.getElementById("register").onclick = () => {
+  notice.textContent = "Connect registration to your authorized service.";
+};
 
-  document.getElementById("demoOtp").value = "";
-  document.getElementById("result").textContent =
-    "Demo completed. No account was accessed and no OTP was verified.";
-});
+document.getElementById("help").onclick = () => {
+  notice.textContent = "Use your provider's official support channel.";
+};
 
-document.getElementById("backBtn").addEventListener("click", () => {
-  document.getElementById("demoOtp").value = "";
-  document.getElementById("result").textContent = "";
-  otpPage.classList.rem
-  
+document.getElementById("terms").onclick = event => {
+  event.preventDefault();
+  notice.textContent = "Add your service's terms URL here.";
+};
+</script>
+</body>
+</html>
