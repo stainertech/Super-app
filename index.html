@@ -1,363 +1,48 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EcoCash-style UI Demo</title>
-<style>
-* { box-sizing: border-box; }
-
-:root {
-  --blue: #0876d8;
-  --border-blue: #367db5;
-  --red: #c74747;
+html {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: #20242a;
+  min-height: 100dvh;
+  width: 100%;
+  background: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .phone {
-  width: min(100vw, 360px);
-  height: min(740px, 100dvh);
-  min-height: 620px;
-  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
-  border-radius: 35px;
-  background: white;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
 .status {
-  height: 32px;
-  padding: 8px 17px 0;
-  font-size: 10px;
-  color: #555;
-  display: flex;
-  justify-content: space-between;
   flex-shrink: 0;
 }
 
 .white-area {
   height: 53%;
-  position: relative;
-  z-index: 1;
-  background: white;
-  border-radius: 0 0 50% 50% / 0 0 12% 12%;
-  padding: 10px 15px 0;
-  text-align: center;
   flex-shrink: 0;
 }
 
-.logo {
-  font-size: 29px;
-  font-weight: 750;
-  letter-spacing: -.8px;
-  margin: 0 0 32px;
-  padding-top: 0;
-}
-
-.logo .eco { color: #1767a9; }
-.logo .cash { color: var(--red); }
-
-h2 {
-  font-size: 17px;
-  margin: 0 0 18px;
-  color: #40494d;
-}
-
-.phone-input {
-  display: flex;
-  align-items: center;
-  height: 44px;
-  border: 1.5px solid var(--border-blue);
-  border-radius: 5px;
-  padding: 0 7px;
-  gap: 7px;
-  text-align: left;
-}
-
-.flag {
-  font-size: 19px;
-  line-height: 1;
-}
-
-.arrow {
-  color: #777;
-  font-size: 11px;
-}
-
-.code {
-  color: #667078;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.phone-input input {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  outline: none;
-  font-size: 13px;
-  background: transparent;
-}
-
-.phone-input input::placeholder {
-  color: #70777b;
-}
-
-.pin-label {
-  color: #62686b;
-  font-size: 12px;
-  margin: 10px 0 21px;
-}
-
-.pin-boxes {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-}
-
-.pin-boxes input {
-  width: 33px;
-  height: 38px;
-  border: 1.5px solid var(--border-blue);
-  border-radius: 6px;
-  text-align: center;
-  font-size: 20px;
-  outline: none;
-  background: white;
-}
-
-.pin-boxes input:focus {
-  border-color: var(--blue);
-}
-
 .blue-area {
-  position: relative;
   flex: 1;
   min-height: 0;
-  margin-top: -1px;
-  background: linear-gradient(150deg, #0876dc, #0060cf);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 20px 12px 27px;
-}
-
-.info-text {
-  text-align: center;
-  font-size: 11px;
-  line-height: 1.5;
-  margin-bottom: 19px;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-
-.action {
-  flex: 1;
-  min-width: 0;
-  height: 58px;
-  background: #f7f7f4;
-  color: #60686b;
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  font-size: 10px;
-}
-
-.action-icon {
-  display: block;
-  color: #0876cf;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.version {
-  font-size: 10px;
-  margin-top: 40px;
-  margin-bottom: 8px;
-}
-
-.terms {
-  font-size: 10px;
-  text-align: center;
-  color: #e5f0ff;
-}
-
-.terms a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-.message {
-  color: #fff;
-  font-size: 11px;
-  text-align: center;
-  min-height: 15px;
-  margin-top: 8px;
 }
 
 .nav-indicator {
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 3px;
-  width: 95px;
-  border-radius: 5px;
-  background: white;
+  bottom: max(6px, env(safe-area-inset-bottom));
 }
-
-@media (max-height: 650px) {
-  .phone { min-height: 0; }
-  .white-area { height: 54%; }
-  .logo { margin-bottom: 15px; }
-  .version { margin-top: 15px; }
-  .blue-area { padding-bottom: 22px; }
-}
-
-@media (min-width: 600px) {
-  .phone {
-    height: 740px;
-    box-shadow: 0 15px 60px #0007;
-  }
-}
-</style>
-</head>
-<body>
-
-<div class="phone">
-  <div class="status">
-    <span>2:04</span>
-    <span>◉ ▴ ▰ 70%</span>
-  </div>
-
-  <section class="white-area">
-    <div class="logo">
-      <span class="eco">Eco</span><span class="cash">Cash</span>
-    </div>
-
-    <h2>Login</h2>
-
-    <label class="phone-input">
-      <span class="flag">🇿🇼</span>
-      <span class="arrow">▼</span>
-      <span class="code">+263</span>
-      <input id="phone" type="tel"
-        inputmode="numeric" maxlength="9"
-        placeholder="Phone Number"
-        aria-label="Demo phone number">
-    </label>
-
-    <div class="pin-label">Enter your PIN</div>
-
-    <div class="pin-boxes">
-      <input maxlength="1" inputmode="numeric" aria-label="PIN digit 1">
-      <input maxlength="1" inputmode="numeric" aria-label="PIN digit 2">
-      <input maxlength="1" inputmode="numeric" aria-label="PIN digit 3">
-      <input maxlength="1" inputmode="numeric" aria-label="PIN digit 4">
-    </div>
-
-    <div id="message" class="message" style="color:#b42318"></div>
-  </section>
-
-  <section class="blue-area">
-    <div class="info-text">
-      To register an EcoCash wallet or get assistance,<br>
-      click below
-    </div>
-
-    <div class="actions">
-      <button class="action" onclick="showInfo('Registration is not available in this demo.')">
-        <span class="action-icon">♟</span>
-        Register
-      </button>
-      <button class="action" onclick="showInfo('Help and Support demo screen.')">
-        <span class="action-icon">●</span>
-        Help &amp; Support
-      </button>
-    </div>
-
-    <div class="version">v4.0.5P</div>
-    <div class="terms">
-      By signing in you agree to the
-      <a href="#" onclick="showInfo('Demo terms and conditions.'); return false;">
-        Terms and Conditions
-      </a>
-    </div>
-  </section>
-
-  <div class="nav-indicator"></div>
-</div>
-
-<script>
-const pinInputs = [...document.querySelectorAll('.pin-boxes input')];
-
-pinInputs.forEach((input, index) => {
-  input.addEventListener('input', () => {
-    input.value = input.value.replace(/\D/g, '').slice(-1);
-
-    if (input.value && index < pinInputs.length - 1) {
-      pinInputs[index + 1].focus();
-    }
-
-    document.getElementById('message').textContent = '';
-  });
-
-  input.addEventListener('keydown', event => {
-    if (event.key === 'Backspace' &&
-        !input.value && index > 0) {
-      pinInputs[index - 1].focus();
-    }
-
-    if (event.key === 'Enter') {
-      demoLogin();
-    }
-  });
-});
-
-function showInfo(message) {
-  document.getElementById('message').textContent = message;
-}
-
-function demoLogin() {
-  const phone = document.getElementById('phone').value.trim();
-  const pin = pinInputs.map(input => input.value).join('');
-
-  if (!/^\d{9}$/.test(phone)) {
-    showInfo('Enter a 9-digit demo number.');
-    return;
-  }
-
-  if (!/^\d{4}$/.test(pin)) {
-    showInfo('Enter four demo PIN digits.');
-    return;
-  }
-
-  showInfo('Demo only: no account was accessed.');
-}
-
-document.getElementById('phone').addEventListener('keydown', event => {
-  if (event.key === 'Enter') pinInputs[0].focus();
-});
-
-// Keep this prototype local: no real authentication or data transmission.
-</script>
-
-</body>
-</html>
